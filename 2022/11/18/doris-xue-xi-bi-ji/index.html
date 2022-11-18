@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Jovinbin">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Doris随笔, Jovinbin">
+    <meta name="description" content="Doris（PB级别数据库）mysql -h localhost -P9030 -u -p
+① 查看表结构desc table （all）;
+
+② 通过命令查看完成状态
+SHOW ALTER TABLE ROLLUP;
+
+③ 查看动态分区表">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Jovinbin</title>
+    <title>Doris随笔 | Jovinbin</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -312,12 +318,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Doris随笔</h1>
                 </div>
             </div>
         </div>
@@ -339,12 +345,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Doris/">
+                                <span class="chip bg-color">Doris</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Doris/" class="post-category">
+                                Doris
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -353,7 +372,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-17
+                    2022-11-18
                 </div>
                 
 
@@ -362,7 +381,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    2.3k
                 </div>
                 
 
@@ -382,19 +401,159 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="Doris（PB级别数据库）"><a href="#Doris（PB级别数据库）" class="headerlink" title="Doris（PB级别数据库）"></a>Doris（PB级别数据库）</h1><p>mysql -h localhost -P9030 -u -p</p>
+<h5 id="①-查看表结构"><a href="#①-查看表结构" class="headerlink" title="① 查看表结构"></a><strong>① 查看表结构</strong></h5><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">desc table （all）;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>② 通过命令查看完成状态</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW ALTER TABLE ROLLUP;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>③ 查看动态分区表调度情况</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW DYNAMIC PARTITION TABLES; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>④ 查看表的分区</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PARTITIONS FROM TABLES;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><strong>⑤ 查看物化视图是否创建成功</strong>	 (Version 0.13)</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW ALTER TABLE MATERIALIZED VIEW FROM test_db;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>⑥ 删除物化视图</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP MATERIALIZED VIEW 物化视图名 on Base 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>⑦ 创建物化索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create materialized view mv_1 as select store_id,record_id,seller_id, sale_date,sale_amt from sales_records;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>⑧ 修改名字 </p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE table1 RENAME table2;
+
+ALTER TABLE example_table RENAME ROLLUP rollup1 rollup2;
+
+ALTER TABLE example_table RENAME PARTITION p1 p2;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>⑨ 导入链路相关命令</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">查看导入：show load order by createtime desc limit 1\G；    show load；
+
+取消导入：CANCEL LOAD [FROM db_name] WHERE LABEL&#x3D;”load_label”; 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>⑩ routine load 导入任务</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">展示导入任务：show routine load\G;
+
+暂停名称为 test1 的例行导入作业：PAUSE ROUTINE LOAD FOR test1;
+
+暂停所有正在运行的例行导入作业：PAUSE ALL ROUTINE LOAD;
+
+恢复名称为 test1 的例行导入作业：RESUME ROUTINE LOAD FOR test1;
+
+恢复所有暂停中的例行导入作业：RESUME ALL ROUTINE LOAD;
+
+停止名称为 test1 的例行导入作业：STOP ROUTINE LOAD FOR test1;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>⭕ <strong>查看数据库信息</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show proc &quot;&#x2F;statistic&quot;；
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>⭕<strong>查看信息</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PROC &#39;&#x2F;dbs&#39;;		
+SHOW PROC &#39;&#x2F;dbs&#x2F;11048&#x2F;32003&#x2F;partitions&#x2F;32131&#x2F;32004&#39;;
+show proc &quot;&#x2F;cluster_balance&quot;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>索引</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">创建索引：CREATE INDEX table_bitmap ON table1 (siteid) USING BITMAP COMMENT  
+
+&#39;table1_bitmap_index&#39;; 
+
+查看索引：SHOW INDEX[ES] FROM [db_name.]table_name [FROM database]; 
+
+或者 SHOW KEY[S] FROM [db_name.]table_name [FROM database]; 
+
+删除索引：DROP INDEX IF EXISTS table_bitmap ON test_db.table1;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>常用命令</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">查看配置信息：show variables;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>​	Doris 的架构很简洁，只设 FE(Frontend)、BE(Backend)两种角色、两个进程，<strong>不依赖于</strong> </p>
+<p><strong>外部组件</strong>，方便部署和运维，FE、BE 都可线性扩展。 </p>
+<p>⚫   <strong>FE（Frontend）</strong>：存储、维护集群<strong>元数据</strong>；负责接收、解析查询请求，规划查询计划， 调度查询执行，返回查询结果。主要有三个角色： </p>
+<p>​	（1）Leader 和 Follower：主要是用来达到元数据的高可用，保证单节点宕机的情况下， </p>
+<p>元数据能够实时地在线恢复，而不影响整个服务。 </p>
+<p>​	（2）Observer：用来扩展查询节点，同时起到元数据备份的作用。如果在发现集群压力 </p>
+<p>非常大的情况下，需要去扩展整个查询的能力，那么可以加 observer 的节点。observer 不 </p>
+<p>参与任何的写入，只参与读取。</p>
+<p>⚫	 <strong>BE（Backend）</strong>：负责<strong>物理数据的存储和计算</strong>；依据 FE 生成的物理计划，分布式地执行查询。 </p>
+<p>​		数据的可靠性由 BE 保证，BE 会对整个数据存储多副本或者是三副本。副本数可根据 </p>
+<p>需求动态调整。 </p>
+<p><strong>1、sql查看状态</strong>（mysql -h hadoop1 -P 9030 -uroot -p）</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PROC &#39;&#x2F;backends&#39;;	查看BE状态
+
+SHOW PROC &quot;&#x2F;brokers&quot;;	查看broker状态
+
+SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>3.2.2 Partition &amp; Tablet</strong> </p>
+<p>​		在 Doris 的存储引擎中，用户数据首先被划分成若干个分区（Partition），划分的规则通 常是按照用户指定的分区列进行范围划分，比如按时间划分。而在每个分区内，数据被进一 步的按照 Hash 的方式分桶，分桶的规则是要找用户指定的分桶列的值进行 Hash 后分桶。 每个分桶就是一个数据分片（Tablet），也是数据划分的最小逻辑单元。 </p>
+<p>⚫ Tablet 之间的数据是没有交集的，独立存储的。Tablet 也是数据移动、复制等操作 </p>
+<p>的最小物理存储单元。 </p>
+<p>⚫ Partition 可以视为是逻辑上最小的管理单元。数据的导入与删除，都可以或仅能针 </p>
+<p>对一个 Partition 进行</p>
+<p><strong>3.4.1</strong> <strong>列定义</strong> </p>
+<p>​		以 AGGREGATE KEY 数据模型为例进行说明。更多数据模型参阅 Doris 数据模型。 列的基本类型，可以通过在 mysql-client 中执行 HELP CREATE TABLE; 查看。 AGGREGATE KEY 数据模型中，所有没有指定聚合方式（SUM、REPLACE、MAX、 MIN）的列视为 Key 列。而其余则为 Value 列。 定义列时，可参照如下建议： </p>
+<p>➢ Key 列必须在所有 Value 列之前。 </p>
+<p>➢ 尽量选择整型类型。因为整型类型的计算和查找比较效率远高于字符串。 </p>
+<p>➢ 对于不同长度的整型类型的选择原则，遵循够用即可。 </p>
+<p>➢ 对于 VARCHAR 和 STRING 类型的长度，遵循 够用即可。 </p>
+<p>➢ 所有列的总字节长度（包括 Key 和 Value）不能超过 100KB。</p>
+<p><strong>3.4.2</strong> <strong>分区与分桶</strong> </p>
+<p>​		Doris 支持两层的数据划分。第一层是 Partition，支持 Range 和 List 的划分方式。第二 层是 Bucket（Tablet），仅支持 Hash 的划分方式。 也可以仅使用一层分区。使用一层分区时，只支持 Bucket 划分。</p>
+<p><strong>3.4.2.1 Partition</strong> </p>
+<p>➢ Partition 列可以指定一列或多列。分区类必须为 KEY 列。多列分区的使用方式在后面介绍。 </p>
+<p>➢ 不论分区列是什么类型，在写分区值时，都需要加<strong>双引号</strong>。 </p>
+<p>➢ 分区数量理论上没有上限。 </p>
+<p>➢ 当不使用 Partition 建表时，系统会自动生成一个和表名同名的，全值范围的 Partition。该 Partition 对用户不可见，并且不可删改。 </p>
+<p><strong>1）Range 分区</strong> （动态分区列数据不能为Date）</p>
+<p>​		分区列通常为时间列，以方便的管理新旧数据。不可添加范围重叠的分区。</p>
+<p><strong>2）List 分区</strong> </p>
+<p>​		分 区 列支 持 BOOLEAN, TINYINT, SMALLINT, INT, BIGINT, LARGEINT, DATE,  DATETIME, CHAR, VARCHAR 数据类型，分区值为枚举值。只有当数据为目标分区枚举值其中之一时，才可以命中分区。不可添加范围重叠的分区。</p>
+<p><strong>3.4.2.2 Bucket</strong> </p>
+<p>（1）如果使用了 Partition，则 DISTRIBUTED … 语句描述的是数据在各个分区内的划 </p>
+<p>分规则。如果不使用 Partition，则描述的是对整个表的数据的划分规则。 </p>
+<p>（2）分桶列可以是多列，但<strong>必须为</strong> <strong>Key</strong> <strong>列</strong>。分桶列可以和 Partition 列相同或不同。 </p>
+<p>（3）分桶列的选择，是在 查询吞吐 和 查询并发 之间的一种权衡： </p>
+<p>​		① 如果选择多个分桶列，则数据分布更均匀。 </p>
+<p>​		如果一个查询条件不包含所有分桶列的等值条件，那么该查询会触发所有分桶同时 </p>
+<p>扫描，这样查询的吞吐会增加，单个查询的延迟随之降低。这个方式适合大吞吐低并发 </p>
+<p>的查询场景。 </p>
+<p>​		② 如果仅选择一个或少数分桶列，则对应的点查询可以仅触发一个分桶扫描。 </p>
+<p>​		此时，当多个点查询并发时，这些查询有较大的概率分别触发不同的分桶扫描，各 </p>
+<p>个查询之间的 IO 影响较小（尤其当不同桶分布在不同磁盘上时），所以这种方式适合 </p>
+<p>高并发的点查询场景。 </p>
+<p>（4）分桶的数量理论上没有上限。 </p>
+<p><img src="http://rljcd74w2.hn-bkt.clouddn.com/%E7%AC%94%E8%AE%B0/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA.jpg"></p>
+<p><strong>3.7 Rollup</strong> （rollup可以调整列的顺序，调整前缀索引的顺序）</p>
+<p>​		ROLLUP 在多维分析中是“上卷”的意思，即将数据按某种指定的粒度进行进一步聚合。 </p>
+<p><strong>3.7.4 ROLLUP</strong> <strong>的几点说明</strong> </p>
+<p>⚫ ROLLUP 最根本的作用是提高某些查询的查询效率（无论是通过聚合来减少数据 量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了“上卷” 的范围。这也是为什么在源代码中，将其命名为 Materialized Index（物化索引）的 原因。</p>
+<p>⚫ ROLLUP 是附属于 Base 表的，可以看做是 Base 表的一种辅助数据结构。用户可以在 Base表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 </p>
+<p>ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。 </p>
+<p>⚫ ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的 ETL 阶段会自动产生所有ROLLUP 的数据），但是不会降低查询效率（只会更好）。 </p>
+<p>⚫ ROLLUP 的数据更新与 Base 表是完全同步的。用户无需关心这个问题。 </p>
+<p>⚫ ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。 </p>
+<p>⚫ 查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。 </p>
+<p>⚫ 某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的聚合模型的局限性一节。 </p>
+<p>⚫ 可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命 中 ROLLUP。 </p>
+<p>⚫ 可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</p>
+<p><img src="http://rljcd74w2.hn-bkt.clouddn.com/%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8C%BA1.jpg"></p>
+<p><img src="http://rljcd74w2.hn-bkt.clouddn.com/%E7%AC%94%E8%AE%B0/%E5%88%86%E5%8C%BA2.jpg"></p>
+<p><img src="http://rljcd74w2.hn-bkt.clouddn.com/%E7%AC%94%E8%AE%B0/roll-up.jpg"></p>
+<p><img src="http://rljcd74w2.hn-bkt.clouddn.com/%E7%AC%94%E8%AE%B0/%E8%A1%A8%E7%BB%93%E6%9E%84%E5%8F%98%E6%9B%B4.jpg"></p>
+<p>2）Observer：用来扩展查询节点，同时起到元数据备份的作用。如果在发现集群压力 </p>
+<p>非常大的情况下，需要去扩展整个查询的能力，那么可以加 observer 的节点。observer 不 </p>
+<p>参与任何的写入，只参与读取。 </p>
+<p>⚫ <strong>BE<strong><strong>（</strong></strong>Backend****）</strong>：负责<strong>物理数据的存储和计算</strong>；依据 FE 生成的物理计划，分布式地执</p>
 
                 
             </div>
@@ -421,7 +580,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/11/17/hello-world/">http://example.com/2022/11/17/hello-world/</a>
+                    <a href="http://example.com/2022/11/18/doris-xue-xi-bi-ji/">http://example.com/2022/11/18/doris-xue-xi-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -458,7 +617,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Doris/">
+                                    <span class="chip bg-color">Doris</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -535,9 +698,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/11/18/doris-xue-xi-bi-ji/">
                     <div class="card-image">
@@ -555,9 +719,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -570,6 +734,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -585,7 +750,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2022/11/17/hello-world/">
@@ -615,7 +780,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
