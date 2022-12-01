@@ -4,14 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Doris随笔, Jovinbin">
-    <meta name="description" content="Doris（PB级别数据库）mysql -h localhost -P9030 -u -p
-① 查看表结构desc table （all）;
+    <meta name="keywords" content="Docker随笔, Jovinbin">
+    <meta name="description" content="要理解 Docker 的内部构建，必须知道Docker 包括三个基本概念:
 
-② 通过命令查看完成状态
-SHOW ALTER TABLE ROLLUP;
-
-③ 查看动态分区表">
+镜像（Image）：Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:16.04 就包含了完整的一套 Ubuntu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +19,7 @@ SHOW ALTER TABLE ROLLUP;
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Doris随笔 | Jovinbin</title>
+    <title>Docker随笔 | Jovinbin</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -318,12 +314,12 @@ SHOW ALTER TABLE ROLLUP;
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Doris随笔</h1>
+                    <h1 class="description center-align post-title">Docker随笔</h1>
                 </div>
             </div>
         </div>
@@ -347,12 +343,12 @@ SHOW ALTER TABLE ROLLUP;
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">学习笔记</span>
+                            <a href="/tags/Docker/">
+                                <span class="chip bg-color">Docker</span>
                             </a>
                         
-                            <a href="/tags/Doris/">
-                                <span class="chip bg-color">Doris</span>
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">学习笔记</span>
                             </a>
                         
                     </div>
@@ -363,8 +359,8 @@ SHOW ALTER TABLE ROLLUP;
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Doris/" class="post-category">
-                                Doris
+                            <a href="/categories/Docker/" class="post-category">
+                                Docker
                             </a>
                         
                     </div>
@@ -376,7 +372,7 @@ SHOW ALTER TABLE ROLLUP;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-18
+                    2022-12-01
                 </div>
                 
 
@@ -385,7 +381,7 @@ SHOW ALTER TABLE ROLLUP;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    872
                 </div>
                 
 
@@ -405,159 +401,152 @@ SHOW ALTER TABLE ROLLUP;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Doris（PB级别数据库）"><a href="#Doris（PB级别数据库）" class="headerlink" title="Doris（PB级别数据库）"></a>Doris（PB级别数据库）</h1><p>mysql -h localhost -P9030 -u -p</p>
-<h5 id="①-查看表结构"><a href="#①-查看表结构" class="headerlink" title="① 查看表结构"></a><strong>① 查看表结构</strong></h5><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">desc table （all）;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <p>要理解 Docker 的内部构建，必须知道Docker 包括三个基本概念:</p>
+<ul>
+<li><strong>镜像（Image）</strong>：Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:16.04 就包含了完整的一套 Ubuntu16.04 最小系统的 root 文件系统。</li>
+<li><strong>容器（Container）</strong>：镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
+<li><strong>仓库（Repository）</strong>：仓库可看成一个代码控制中心，用来保存镜像。</li>
+</ul>
+<h4 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h4><h5 id="一、镜像-x2F-容器"><a href="#一、镜像-x2F-容器" class="headerlink" title="一、镜像 &#x2F; 容器"></a><em><strong>一、镜像 &#x2F; 容器</strong></em></h5><ul>
+<li><strong>启动时交互</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span>  镜像名称【-i：交互，-t：伪终端，-d：守护式容器】【--name aaa】docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8080</span>:8080 tomcat 小p指定端口映射，大P随机端口<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>② 通过命令查看完成状态</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW ALTER TABLE ROLLUP;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>查看日志</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> logs <span class="token parameter variable">-tf</span> <span class="token parameter variable">--tail</span> <span class="token number">3</span> 4e237e0e8f08<span class="token punctuation">(</span>容器id<span class="token punctuation">)</span>：【-t：查看内容，-f加上查看时间】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>③ 查看动态分区表调度情况</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW DYNAMIC PARTITION TABLES; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>查看容器中运行进程的信息</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">top</span> 容器id <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>④ 查看表的分区</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PARTITIONS FROM TABLES;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>重新进入容器</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> attach 容器id<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>⑤ 查看物化视图是否创建成功</strong>	 (Version 0.13)</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW ALTER TABLE MATERIALIZED VIEW FROM test_db;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>重新进入容器（加强版）</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> 容器id /bin/bash <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>⑥ 删除物化视图</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP MATERIALIZED VIEW 物化视图名 on Base 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>直接在外部获取容器内的信息</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-t</span> 容器id <span class="token function">ls</span> <span class="token parameter variable">-l</span> /tmp（所以exec比attach强大）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>⑦ 创建物化索引</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create materialized view mv_1 as select store_id,record_id,seller_id, sale_date,sale_amt from sales_records;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>查看运行的相关信息</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> inspect 容器id <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>⑧ 修改名字 </p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE table1 RENAME table2;
+<ul>
+<li><strong>docker帮助，相当于文档</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--help</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-ALTER TABLE example_table RENAME ROLLUP rollup1 rollup2;
+<ul>
+<li><strong>重启、删除、启动docker</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl restart<span class="token punctuation">\</span>stop<span class="token punctuation">\</span>start <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-ALTER TABLE example_table RENAME PARTITION p1 p2;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>查看镜像</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dcoker images<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>⑨ 导入链路相关命令</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">查看导入：show load order by createtime desc limit 1\G；    show load；
+<ul>
+<li><strong>运行镜像</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-取消导入：CANCEL LOAD [FROM db_name] WHERE LABEL&#x3D;”load_label”; 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>a表示列出所有的镜像 	q表示列出所有的id</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> images 【-qa】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>⑩ routine load 导入任务</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">展示导入任务：show routine load\G;
+<ul>
+<li><strong>拉取镜像</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull 某个镜像的名字<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-暂停名称为 test1 的例行导入作业：PAUSE ROUTINE LOAD FOR test1;
+<ul>
+<li><strong>删除镜像</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> rmi 【-f】 某个镜像的名字 ：删除镜像    -f：强制删除	以空格分割  删除多个镜像<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-暂停所有正在运行的例行导入作业：PAUSE ALL ROUTINE LOAD;
+<ul>
+<li><strong>查看有几个容器在运行</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> ps（【-l：上一次运行的】【-a：所有运行的】【-n num：显示几次运行的】【-q静默模式：只显示容器编号】【--no-trunc：不截断输出】）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-恢复名称为 test1 的例行导入作业：RESUME ROUTINE LOAD FOR test1;
+<ul>
+<li><strong>退出容器</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">exit（推出关闭） 	CTRL+P+Q（退出不关闭）	<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-恢复所有暂停中的例行导入作业：RESUME ALL ROUTINE LOAD;
+<ul>
+<li><strong>启动容器</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> start/stop/restart/kill/rm 容器编号	删除如果强制删除就加 <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-停止名称为 test1 的例行导入作业：STOP ROUTINE LOAD FOR test1;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>批量删除</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">rm</span> <span class="token parameter variable">-f</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span><span class="token variable">)</span></span>
+<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">docker</span> <span class="token function">rm</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>⭕ <strong>查看数据库信息</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show proc &quot;&#x2F;statistic&quot;；
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><strong>提交镜像</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> commit <span class="token parameter variable">-m</span><span class="token operator">=</span>“提交的描述信息” <span class="token parameter variable">-a</span><span class="token operator">=</span>“作者” 容器ID 要创建的目标敬香茗：【标签名】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>⭕<strong>查看信息</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PROC &#39;&#x2F;dbs&#39;;		
-SHOW PROC &#39;&#x2F;dbs&#x2F;11048&#x2F;32003&#x2F;partitions&#x2F;32131&#x2F;32004&#39;;
-show proc &quot;&#x2F;cluster_balance&quot;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>容器拷贝到主机</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">cp</span> 容器ID:容器路径 主机路径<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>索引</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">创建索引：CREATE INDEX table_bitmap ON table1 (siteid) USING BITMAP COMMENT  
+<ul>
+<li><p><strong>容器数据卷（容器的持久化，容器间集成、数据的共享）</strong></p>
+<ul>
+<li>宿主机和容器的数据共享（容器的挂载）</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">-v</span> /myDatavolume:/dataVolumeContainer centos<span class="token punctuation">(</span>容器名称<span class="token punctuation">)</span>
 
-&#39;table1_bitmap_index&#39;; 
+<span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">-v</span> /myDatavolume:/dataVolumeContainer:ro centos<span class="token punctuation">(</span>容器名称<span class="token punctuation">)</span> 只读<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-查看索引：SHOW INDEX[ES] FROM [db_name.]table_name [FROM database]; 
+<ul>
+<li><p>DockerFile（编写 构建 执行）</p>
+<p>DockerFile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本</p>
+<ul>
+<li>手动编写一个DockerFile文件，必须要符合file的规范</li>
+<li>有这个文件后，直接docker build命令执行，获得一个自定义的镜像</li>
+<li>启动（run）</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">docker build -f &#x2F;mydocker&#x2F;Dockerfile -t zjb&#x2F;centos .	自己重新构建的镜像<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-或者 SHOW KEY[S] FROM [db_name.]table_name [FROM database]; 
+<pre class="line-numbers language-docker" data-language="docker"><code class="language-docker"><span class="token comment"># volume test</span>
+<span class="token instruction"><span class="token keyword">FROM</span> centos</span>
+<span class="token instruction"><span class="token keyword">VOLUME</span> [<span class="token string">"/dataVolumeContainer1"</span>,<span class="token string">"/dataVolumeCtontainer2"</span>]</span>
+<span class="token instruction"><span class="token keyword">CMD</span> echo <span class="token string">"finished,---------success1"</span></span>
+<span class="token instruction"><span class="token keyword">CMD</span> /bin/bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>容器间能实现数据卷的共享</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--name</span> dc02 --volumes-from dc01 zjb/centos <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-删除索引：DROP INDEX IF EXISTS table_bitmap ON test_db.table1;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>常用命令</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">查看配置信息：show variables;
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>​	Doris 的架构很简洁，只设 FE(Frontend)、BE(Backend)两种角色、两个进程，<strong>不依赖于</strong> </p>
-<p><strong>外部组件</strong>，方便部署和运维，FE、BE 都可线性扩展。 </p>
-<p>⚫   <strong>FE（Frontend）</strong>：存储、维护集群<strong>元数据</strong>；负责接收、解析查询请求，规划查询计划， 调度查询执行，返回查询结果。主要有三个角色： </p>
-<p>​	（1）Leader 和 Follower：主要是用来达到元数据的高可用，保证单节点宕机的情况下， </p>
-<p>元数据能够实时地在线恢复，而不影响整个服务。 </p>
-<p>​	（2）Observer：用来扩展查询节点，同时起到元数据备份的作用。如果在发现集群压力 </p>
-<p>非常大的情况下，需要去扩展整个查询的能力，那么可以加 observer 的节点。observer 不 </p>
-<p>参与任何的写入，只参与读取。</p>
-<p>⚫	 <strong>BE（Backend）</strong>：负责<strong>物理数据的存储和计算</strong>；依据 FE 生成的物理计划，分布式地执行查询。 </p>
-<p>​		数据的可靠性由 BE 保证，BE 会对整个数据存储多副本或者是三副本。副本数可根据 </p>
-<p>需求动态调整。 </p>
-<p><strong>1、sql查看状态</strong>（mysql -h hadoop1 -P 9030 -uroot -p）</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW PROC &#39;&#x2F;backends&#39;;	查看BE状态
-
-SHOW PROC &quot;&#x2F;brokers&quot;;	查看broker状态
-
-SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>3.2.2 Partition &amp; Tablet</strong> </p>
-<p>​		在 Doris 的存储引擎中，用户数据首先被划分成若干个分区（Partition），划分的规则通 常是按照用户指定的分区列进行范围划分，比如按时间划分。而在每个分区内，数据被进一 步的按照 Hash 的方式分桶，分桶的规则是要找用户指定的分桶列的值进行 Hash 后分桶。 每个分桶就是一个数据分片（Tablet），也是数据划分的最小逻辑单元。 </p>
-<p>⚫ Tablet 之间的数据是没有交集的，独立存储的。Tablet 也是数据移动、复制等操作 </p>
-<p>的最小物理存储单元。 </p>
-<p>⚫ Partition 可以视为是逻辑上最小的管理单元。数据的导入与删除，都可以或仅能针 </p>
-<p>对一个 Partition 进行</p>
-<p><strong>3.4.1</strong> <strong>列定义</strong> </p>
-<p>​		以 AGGREGATE KEY 数据模型为例进行说明。更多数据模型参阅 Doris 数据模型。 列的基本类型，可以通过在 mysql-client 中执行 HELP CREATE TABLE; 查看。 AGGREGATE KEY 数据模型中，所有没有指定聚合方式（SUM、REPLACE、MAX、 MIN）的列视为 Key 列。而其余则为 Value 列。 定义列时，可参照如下建议： </p>
-<p>➢ Key 列必须在所有 Value 列之前。 </p>
-<p>➢ 尽量选择整型类型。因为整型类型的计算和查找比较效率远高于字符串。 </p>
-<p>➢ 对于不同长度的整型类型的选择原则，遵循够用即可。 </p>
-<p>➢ 对于 VARCHAR 和 STRING 类型的长度，遵循 够用即可。 </p>
-<p>➢ 所有列的总字节长度（包括 Key 和 Value）不能超过 100KB。</p>
-<p><strong>3.4.2</strong> <strong>分区与分桶</strong> </p>
-<p>​		Doris 支持两层的数据划分。第一层是 Partition，支持 Range 和 List 的划分方式。第二 层是 Bucket（Tablet），仅支持 Hash 的划分方式。 也可以仅使用一层分区。使用一层分区时，只支持 Bucket 划分。</p>
-<p><strong>3.4.2.1 Partition</strong> </p>
-<p>➢ Partition 列可以指定一列或多列。分区类必须为 KEY 列。多列分区的使用方式在后面介绍。 </p>
-<p>➢ 不论分区列是什么类型，在写分区值时，都需要加<strong>双引号</strong>。 </p>
-<p>➢ 分区数量理论上没有上限。 </p>
-<p>➢ 当不使用 Partition 建表时，系统会自动生成一个和表名同名的，全值范围的 Partition。该 Partition 对用户不可见，并且不可删改。 </p>
-<p><strong>1）Range 分区</strong> （动态分区列数据不能为Date）</p>
-<p>​		分区列通常为时间列，以方便的管理新旧数据。不可添加范围重叠的分区。</p>
-<p><strong>2）List 分区</strong> </p>
-<p>​		分 区 列支 持 BOOLEAN, TINYINT, SMALLINT, INT, BIGINT, LARGEINT, DATE,  DATETIME, CHAR, VARCHAR 数据类型，分区值为枚举值。只有当数据为目标分区枚举值其中之一时，才可以命中分区。不可添加范围重叠的分区。</p>
-<p><strong>3.4.2.2 Bucket</strong> </p>
-<p>（1）如果使用了 Partition，则 DISTRIBUTED … 语句描述的是数据在各个分区内的划 </p>
-<p>分规则。如果不使用 Partition，则描述的是对整个表的数据的划分规则。 </p>
-<p>（2）分桶列可以是多列，但<strong>必须为</strong> <strong>Key</strong> <strong>列</strong>。分桶列可以和 Partition 列相同或不同。 </p>
-<p>（3）分桶列的选择，是在 查询吞吐 和 查询并发 之间的一种权衡： </p>
-<p>​		① 如果选择多个分桶列，则数据分布更均匀。 </p>
-<p>​		如果一个查询条件不包含所有分桶列的等值条件，那么该查询会触发所有分桶同时 </p>
-<p>扫描，这样查询的吞吐会增加，单个查询的延迟随之降低。这个方式适合大吞吐低并发 </p>
-<p>的查询场景。 </p>
-<p>​		② 如果仅选择一个或少数分桶列，则对应的点查询可以仅触发一个分桶扫描。 </p>
-<p>​		此时，当多个点查询并发时，这些查询有较大的概率分别触发不同的分桶扫描，各 </p>
-<p>个查询之间的 IO 影响较小（尤其当不同桶分布在不同磁盘上时），所以这种方式适合 </p>
-<p>高并发的点查询场景。 </p>
-<p>（4）分桶的数量理论上没有上限。 </p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054585.png"></p>
-<p><strong>3.7 Rollup</strong> （rollup可以调整列的顺序，调整前缀索引的顺序）</p>
-<p>​		ROLLUP 在多维分析中是“上卷”的意思，即将数据按某种指定的粒度进行进一步聚合。 </p>
-<p><strong>3.7.4 ROLLUP</strong> <strong>的几点说明</strong> </p>
-<p>⚫ ROLLUP 最根本的作用是提高某些查询的查询效率（无论是通过聚合来减少数据 量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了“上卷” 的范围。这也是为什么在源代码中，将其命名为 Materialized Index（物化索引）的 原因。</p>
-<p>⚫ ROLLUP 是附属于 Base 表的，可以看做是 Base 表的一种辅助数据结构。用户可以在 Base表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 </p>
-<p>ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。 </p>
-<p>⚫ ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的 ETL 阶段会自动产生所有ROLLUP 的数据），但是不会降低查询效率（只会更好）。 </p>
-<p>⚫ ROLLUP 的数据更新与 Base 表是完全同步的。用户无需关心这个问题。 </p>
-<p>⚫ ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。 </p>
-<p>⚫ 查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。 </p>
-<p>⚫ 某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的聚合模型的局限性一节。 </p>
-<p>⚫ 可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命 中 ROLLUP。 </p>
-<p>⚫ 可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054941.png"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054412.png"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055054.png"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055372.png"></p>
-<p>2）Observer：用来扩展查询节点，同时起到元数据备份的作用。如果在发现集群压力 </p>
-<p>非常大的情况下，需要去扩展整个查询的能力，那么可以加 observer 的节点。observer 不 </p>
-<p>参与任何的写入，只参与读取。 </p>
-<p>⚫ <strong>BE<strong><strong>（</strong></strong>Backend****）</strong>：负责<strong>物理数据的存储和计算</strong>；依据 FE 生成的物理计划，分布式地执</p>
+<p>删除dc10，dc02修改后dc03可以访问</p>
+<p>删除dc02后dc03可以访问</p>
+<p>新建dc04集成dc03后在删除dc03可以访问</p>
+<p>结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用为止</p>
+</li>
+</ul>
+</li>
+<li><p>DockerFile体系结构（保留字指令）</p>
+</li>
+</ul>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011557216.png"></p>
 
                 
             </div>
@@ -584,7 +573,7 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/11/18/doris-xue-xi-bi-ji/">http://example.com/2022/11/18/doris-xue-xi-bi-ji/</a>
+                    <a href="http://example.com/2022/12/01/docker-xue-xi-bi-ji/">http://example.com/2022/12/01/docker-xue-xi-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -622,12 +611,12 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">学习笔记</span>
+                                <a href="/tags/Docker/">
+                                    <span class="chip bg-color">Docker</span>
                                 </a>
                             
-                                <a href="/tags/Doris/">
-                                    <span class="chip bg-color">Doris</span>
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">学习笔记</span>
                                 </a>
                             
                         </div>
@@ -710,6 +699,63 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2022/12/01/java-hdfs-ji-qun-lian-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JAVA API连接HDFS HA集群">
+                        
+                        <span class="card-title">JAVA API连接HDFS HA集群</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Hdfs/" class="post-category">
+                                    Hdfs
+                                </a>
+                            
+                            <a href="/categories/Hdfs/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hdfs/">
+                        <span class="chip bg-color">Hdfs</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2022/12/01/hexo-github-bo-ke-da-jian/">
                     <div class="card-image">
                         
@@ -726,9 +772,9 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -746,55 +792,6 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
                     
                     <a href="/tags/Hexo/">
                         <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/11/18/mysql-an-zhuang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="MySQL安装">
-                        
-                        <span class="card-title">MySQL安装</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/MySQL/" class="post-category">
-                                    MySQL
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
                     </a>
                     
                 </div>
