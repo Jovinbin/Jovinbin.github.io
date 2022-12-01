@@ -532,7 +532,7 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
 <p>个查询之间的 IO 影响较小（尤其当不同桶分布在不同磁盘上时），所以这种方式适合 </p>
 <p>高并发的点查询场景。 </p>
 <p>（4）分桶的数量理论上没有上限。 </p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054585.png" alt="image-20221201105403532"></p>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054585.png"></p>
 <p><strong>3.7 Rollup</strong> （rollup可以调整列的顺序，调整前缀索引的顺序）</p>
 <p>​		ROLLUP 在多维分析中是“上卷”的意思，即将数据按某种指定的粒度进行进一步聚合。 </p>
 <p><strong>3.7.4 ROLLUP</strong> <strong>的几点说明</strong> </p>
@@ -546,10 +546,10 @@ SHOW PROC &#39;&#x2F;frontends&#39;;	查看FE状态
 <p>⚫ 某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的聚合模型的局限性一节。 </p>
 <p>⚫ 可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命 中 ROLLUP。 </p>
 <p>⚫ 可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054941.png" alt="image-20221201105432908"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054412.png" alt="image-20221201105453371"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055054.png" alt="image-20221201105515015"></p>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055372.png" alt="image-20221201105535322"></p>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054941.png"></p>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011054412.png"></p>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055054.png"></p>
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011055372.png"></p>
 <p>2）Observer：用来扩展查询节点，同时起到元数据备份的作用。如果在发现集群压力 </p>
 <p>非常大的情况下，需要去扩展整个查询的能力，那么可以加 observer 的节点。observer 不 </p>
 <p>参与任何的写入，只参与读取。 </p>
