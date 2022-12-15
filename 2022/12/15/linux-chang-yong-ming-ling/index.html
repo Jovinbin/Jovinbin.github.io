@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux 常见命令, Jovinbin">
+    <meta name="keywords" content="Linux 常用命令, Jovinbin">
     <meta name="description" content="1、Linux 查询命令ps -ef|grep flume
 
 2、查询端口netstat -lntp|grep 9092
@@ -25,7 +25,7 @@ ulimit -a">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Linux 常见命令 | Jovinbin</title>
+    <title>Linux 常用命令 | Jovinbin</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -320,12 +320,12 @@ ulimit -a">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux 常见命令</h1>
+                    <h1 class="description center-align post-title">Linux 常用命令</h1>
                 </div>
             </div>
         </div>
@@ -443,44 +443,50 @@ ssh-keygen <span class="token parameter variable">-t</span> rsa 三次回车生�
 拷贝到另一台机器	ssh-copy-id 机器ip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>9、查看开机启动项</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">查看开机启动项状态：systemctl list-unit-files
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看开机启动项状态</span>
+systemctl list-unit-files
 
-设置开机自启项
+<span class="token comment"># 设置开机自启项</span>
 systemctl <span class="token builtin class-name">enable</span> redis
 systemctl <span class="token builtin class-name">enable</span> nginx.service
 
-启动nginx
+<span class="token comment"># 启动nginx</span>
 systemctl start nginx.service
 
-结束nginx
+<span class="token comment"># 结束nginx</span>
 systemctl stop nginx.service
 
-重启nginx
-systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 重启nginx</span>
+systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>10、防火墙相关命令</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">// 查看防火墙的状态的命令为：
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看防火墙的状态的命令为：</span>
 <span class="token function">sudo</span> systemctl status firewalld
 
-// 打开防火墙的方式有两种，一种是打开后重启会恢复回原来的状态，命令为：
+<span class="token comment"># 打开防火墙的方式有两种，一种是打开后重启会恢复回原来的状态，命令为：</span>
 <span class="token function">sudo</span> systemctl start firewalld
-// 关闭的
+<span class="token comment"># 关闭的</span>
 <span class="token function">sudo</span> systemctl stop firewalld
 
-// 另一种是打开后重启不会恢复到原来的状态，命令为：这种方式输入命令后要重启系统才会生效。
+<span class="token comment"># 另一种是打开后重启不会恢复到原来的状态，命令为：这种方式输入命令后要重启系统才会生效。</span>
 <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> firewalld
-// 关闭 
+<span class="token comment"># 关闭 </span>
 <span class="token function">sudo</span> systemctl disable firewalld
 
-查看开放的端口：firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --list-ports
+<span class="token comment"># 查看开放的端口</span>
+firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --list-ports
 
-添加指定需要开放的端口：firewall-cmd --add-port<span class="token operator">=</span><span class="token number">123</span>/tcp <span class="token parameter variable">--permanent</span>
+<span class="token comment"># 添加指定需要开放的端口</span>
+firewall-cmd --add-port<span class="token operator">=</span><span class="token number">123</span>/tcp <span class="token parameter variable">--permanent</span>
 
-查询某个端口是否开放：firewall-cmd --query-port<span class="token operator">=</span><span class="token number">666</span>/tcp
+<span class="token comment"># 查询某个端口是否开放</span>
+firewall-cmd --query-port<span class="token operator">=</span><span class="token number">666</span>/tcp
 
-重载入添加的端口：firewall-cmd <span class="token parameter variable">--reload</span>
+<span class="token comment"># 重载入添加的端口</span>
+firewall-cmd <span class="token parameter variable">--reload</span>
 
-移除指定端口：firewall-cmd <span class="token parameter variable">--permanent</span> --remove-port<span class="token operator">=</span><span class="token number">123</span>/tcp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 移除指定端口</span>
+firewall-cmd <span class="token parameter variable">--permanent</span> --remove-port<span class="token operator">=</span><span class="token number">123</span>/tcp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>11、查看所有节点ntpd服务状态和开机自启动状态</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl status ntpd
@@ -572,7 +578,7 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/12/15/linux-chang-yong-ming-ling/">http://example.com/2022/12/15/linux-chang-yong-ming-ling/</a>
+                    <a href="https://jovinbin.github.io/2022/12/15/linux-chang-yong-ming-ling/">https://jovinbin.github.io/2022/12/15/linux-chang-yong-ming-ling/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -703,9 +709,9 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Linux 常见命令">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Linux 常用命令">
                         
-                        <span class="card-title">Linux 常见命令</span>
+                        <span class="card-title">Linux 常用命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
