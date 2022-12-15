@@ -387,7 +387,7 @@ ulimit -a">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    618
+                    681
                 </div>
                 
 
@@ -492,6 +492,12 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
 <p><strong>12、查看运行内存占用情况</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> stats <span class="token operator">|</span> <span class="token function">grep</span> k8s_mysql-*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p><strong>13、查看服务器内存情况</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">free</span> <span class="token parameter variable">-h</span>	 <span class="token comment"># 查看服务的内存使用情况</span>
+<span class="token function">cat</span> /proc/meminfo <span class="token comment"># 查看内存的具体使用情况</span>
+<span class="token comment"># 可以在命令前加上watch 表示每2秒刷新一次，案例如下：</span>
+<span class="token function">watch</span> <span class="token function">cat</span> /proc/meminfo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 
 
 
@@ -566,7 +572,7 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/12/15/linux-cha-xun-ming-ling/">http://example.com/2022/12/15/linux-cha-xun-ming-ling/</a>
+                    <a href="http://example.com/2022/12/15/linux-chang-yong-ming-ling/">http://example.com/2022/12/15/linux-chang-yong-ming-ling/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -693,7 +699,7 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/12/15/linux-cha-xun-ming-ling/">
+                <a href="/2022/12/15/linux-chang-yong-ming-ling/">
                     <div class="card-image">
                         
                         
@@ -987,7 +993,7 @@ systemctl restart nginx.service<span aria-hidden="true" class="line-numbers-rows
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">7.9k</span>
+                        class="white-color">8k</span>
             
             
             
