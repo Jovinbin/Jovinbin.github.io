@@ -254,14 +254,31 @@ mark {
     color: #fff;
 }
 
+/* 底部滚动条的样式颜色 */
 .progress-bar {
     height: 4px;
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    background: linear-gradient(to right, #393f38 0%, #6c9893 100%);
     opacity: 0.8;
 }
+
+/* 右侧滚动条样式颜色 */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(58, 61, 56, 0.75);
+    /*background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.4) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.4) 75%,transparent 75%,transparent);*/
+    border-radius: 3em;
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(225, 232, 228);
+    border-radius: 3em;
+}
+::-webkit-scrollbar {
+    width: 15px;
+    height: 5px;
+}
+/* 右侧滚动条截止 */
 
 .sidenav-overlay {
     z-index: 500;
