@@ -377,7 +377,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    17.8k
+                    20k
                 </div>
                 
 
@@ -744,7 +744,58 @@
 <li>使用适当的调度算法，如先来先服务、时间片轮转、优先级调度等，以最大限度地减少上下文切换的次数。</li>
 </ol>
 </blockquote>
-<h3 id="四、JVM"><a href="#四、JVM" class="headerlink" title="四、JVM"></a>四、JVM</h3><h4 id="1、介绍下Java内存区域（运行时数据区）"><a href="#1、介绍下Java内存区域（运行时数据区）" class="headerlink" title="1、介绍下Java内存区域（运行时数据区）"></a>1、介绍下Java内存区域（运行时数据区）</h4><blockquote>
+<h3 id="四、线程池"><a href="#四、线程池" class="headerlink" title="四、线程池"></a>四、线程池</h3><h4 id="1、什么是线程池？"><a href="#1、什么是线程池？" class="headerlink" title="1、什么是线程池？"></a>1、什么是线程池？</h4><blockquote>
+<p>线程池就是管理一系列线程的资源池。当有任务要处理时，直接从线程池中获取线程来处理，处理完之后线程并不会立即被销毁，而是等待下一个任务。</p>
+</blockquote>
+<h4 id="2、为什么要用线程池？"><a href="#2、为什么要用线程池？" class="headerlink" title="2、为什么要用线程池？"></a>2、为什么要用线程池？</h4><blockquote>
+<ul>
+<li>降低资源消耗：通过重复利用已创建的线程降低线程创建和销毁的消耗。</li>
+<li>提高响应速度：当任务到达时，任务可以不需要等到线程创建就能立即执行。</li>
+<li>提高线程的可管理性：无限制的创建线程，不仅会消耗系统的资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+</ul>
+</blockquote>
+<h4 id="3、如何创建线程池？"><a href="#3、如何创建线程池？" class="headerlink" title="3、如何创建线程池？"></a>3、如何创建线程池？</h4><blockquote>
+<ul>
+<li><p>通过<code>ThreadPoolExecutor</code>构造函数创建（推荐）;</p>
+</li>
+<li><p>通过<code>Executor</code>框架的工具类<code>Executor</code>来创建</p>
+<ul>
+<li><p><strong><code>FixedThreadPool</code></strong> ： 该方法返回一个固定线程数量的线程池。该线程池中的线程数量始终不变。当有一个新的任务提交时，线程池中若有空闲线程，则立即执行。若没有，则新的任务会被暂存在一个任务队列中，待有线程空闲时，便处理在任务队列中的任务。</p>
+<p><strong><code>SingleThreadExecutor</code>：</strong> 该方法返回一个只有一个线程的线程池。若多余一个任务被提交到该线程池，任务会被保存在一个任务队列中，待线程空闲，按先入先出的顺序执行队列中的任务。</p>
+<p><strong><code>CachedThreadPool</code>：</strong> 该方法返回一个可根据实际情况调整线程数量的线程池。线程池的线程数量不确定，但若有空闲线程可以复用，则会优先使用可复用的线程。若所有线程均在工作，又有新的任务提交，则会创建新的线程处理任务。所有线程在当前任务执行完毕后，将返回线程池进行复用。</p>
+<p><strong><code>ScheduledThreadPool</code></strong> ：该返回一个用来在给定的延迟后运行任务或者定期执行任务的线程池。</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="4、线程池常见参数有哪些？如何解释？"><a href="#4、线程池常见参数有哪些？如何解释？" class="headerlink" title="4、线程池常见参数有哪些？如何解释？"></a>4、线程池常见参数有哪些？如何解释？</h4><blockquote>
+<p><strong><code>ThreadPoolExecutor</code> 3 个最重要的参数：</strong></p>
+<ul>
+<li><code>corePoolSize</code>（核心线程数）：任务队列未达到队列容量时，最大可以同时运行的线程数量。</li>
+<li><code>maxPoolSize</code>（最大线程数）：任务队列中存放的任务达到队列容量的时候，当前可以同时运行的线程数量变为最大线程数。</li>
+<li><code>queueCapacity</code>（消息队列数量）：新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中。</li>
+</ul>
+<p><code>ThreadPoolExecutor</code>其他常见参数 :</p>
+<ul>
+<li><code>keepAliveSeconds</code>（存活时间）：线程池中的线程数量大于 <code>corePoolSize</code> 的时候，如果这时没有新的任务提交，核心线程外的线程不会立即销毁，而是会等待，直到等待的时间超过了 <code>keepAliveTime</code>才会被回收销毁；</li>
+<li><code>rejectedExecutionHandler</code>（拒绝策略）<ul>
+<li><code>ThreadPoolExecutor.AbortPolicy</code>： 抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
+<li><code>ThreadPoolExecutor.CallerRunsPolicy</code>： 调用执行自己的线程运行任务，也就是直接在调用<code>execute</code>方法的线程中运行(<code>run</code>)被拒绝的任务，如果执行程序已关闭，则会丢弃该任务。因此这种策略会降低对于新任务提交速度，影响程序的整体性能。如果您的应用程序可以承受此延迟并且你要求任何一个任务请求都要被执行的话，你可以选择这个策略。</li>
+<li><code>ThreadPoolExecutor.DiscardPolicy</code>：*不处理新任务，直接丢弃掉。</li>
+<li><code>ThreadPoolExecutor.DiscardOldestPolicy</code>： 此策略将丢弃最早的未处理的任务请求。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="5、线程池处理任务的流程？"><a href="#5、线程池处理任务的流程？" class="headerlink" title="5、线程池处理任务的流程？"></a>5、线程池处理任务的流程？</h4><p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202302231553018.png" alt="image-20230223155345913"></p>
+<ul>
+<li>如果当前运行的线程数小于核心线程数，那么就会创建一个线程来执行任务。</li>
+<li>如果当前运行的线程数等于或大于核心线程数，那么就把该任务放入到任务队列里等待执行。</li>
+<li>如果向任务队列投放任务失败（任务队列已经满了），但是当前运行的线程数量是小于最大线程数的，就新建一个线程来执行任务。</li>
+<li>如果当前运行的线程数已经等同于最大线程数了，新建线程将会使当前运行的线程超出最大线程数，那么当前任务会被拒绝，拒绝策略会调用<code>RejectedExecutionHandler.rejectedExecution()</code>方法。</li>
+</ul>
+<h3 id="五、JVM"><a href="#五、JVM" class="headerlink" title="五、JVM"></a>五、JVM</h3><h4 id="1、介绍下Java内存区域（运行时数据区）"><a href="#1、介绍下Java内存区域（运行时数据区）" class="headerlink" title="1、介绍下Java内存区域（运行时数据区）"></a>1、介绍下Java内存区域（运行时数据区）</h4><blockquote>
 <p>Java内存区域（运行时数据区）是指在Java虚拟机中用来存储程序执行期间的数据的区域，Java虚拟机规范将其划分为以下五个区域：</p>
 <ol>
 <li>程序计数器：是一块较小的内存区域，用于指示JVM正在执行的字节码指令的地址。由于Java虚拟机采用的是线程轮流切换执行的方式，因此每个线程都要有一个独立的程序计数器，各个线程之间互不干扰，独立存储，这也是为什么Java虚拟机规范中把程序计数器定义为线程私有的原因。</li>
@@ -854,7 +905,7 @@
 <p>值得注意的是，类的加载、链接和初始化阶段并非完全独立，它们之间可能存在依赖关系。例如，在解析阶段需要访问类的父类或接口，因此在加载和链接阶段也需要加载和链接父类或接口。</p>
 <p>综上所述，Java类加载过程包括加载、链接和初始化三个阶段，这三个阶段之间可能存在依赖关系，它们共同完成将Java类的字节码加载到Java虚拟机中的过程。</p>
 </blockquote>
-<h3 id="五、Spring"><a href="#五、Spring" class="headerlink" title="五、Spring"></a>五、Spring</h3><h4 id="1、什么是Spring框架？"><a href="#1、什么是Spring框架？" class="headerlink" title="1、什么是Spring框架？"></a>1、什么是Spring框架？</h4><blockquote>
+<h3 id="六、Spring"><a href="#六、Spring" class="headerlink" title="六、Spring"></a>六、Spring</h3><h4 id="1、什么是Spring框架？"><a href="#1、什么是Spring框架？" class="headerlink" title="1、什么是Spring框架？"></a>1、什么是Spring框架？</h4><blockquote>
 <p>Spring框架是一个开源的Java应用框架，它提供了一个全面的编程和配置模型，用于构建企业级应用程序和服务。Spring框架的核心特性包括：</p>
 <ol>
 <li>依赖注入（Dependency Injection）：通过IOC容器管理组件之间的依赖关系，将应用程序的组件解耦并进行松散耦合设计。</li>
@@ -1018,7 +1069,63 @@
 <p>在项目中，@Transactional(rollbackFor&#x3D;Exception.class)，如果类加了这个注解，那么这个类里面的方法抛出异常，就会回滚，数据库里面的数据也会回滚。</p>
 <p>在@Transactional注解中如果不配置rollbackFor属性,那么事物只会在遇到RuntimeException的时候才会回滚,加上rollbackFor&#x3D;Exception.class,可以让事物在遇到非运行时异常时也回滚</p>
 </blockquote>
-<h3 id="六、网络"><a href="#六、网络" class="headerlink" title="六、网络"></a>六、网络</h3><h4 id="1、OSI与TCP-x2F-IP各层的结构与功能，都有哪些协议？"><a href="#1、OSI与TCP-x2F-IP各层的结构与功能，都有哪些协议？" class="headerlink" title="1、OSI与TCP&#x2F;IP各层的结构与功能，都有哪些协议？"></a>1、OSI与TCP&#x2F;IP各层的结构与功能，都有哪些协议？</h4><h4 id="2、TCP三次握手与四次挥手"><a href="#2、TCP三次握手与四次挥手" class="headerlink" title="2、TCP三次握手与四次挥手?"></a>2、TCP三次握手与四次挥手?</h4><h4 id="3、TCP、UDP协议的区别"><a href="#3、TCP、UDP协议的区别" class="headerlink" title="3、TCP、UDP协议的区别"></a>3、TCP、UDP协议的区别</h4><h4 id="4、TCP协议如何保证可靠性传输"><a href="#4、TCP协议如何保证可靠性传输" class="headerlink" title="4、TCP协议如何保证可靠性传输"></a>4、TCP协议如何保证可靠性传输</h4><h4 id="5、ARQ协议"><a href="#5、ARQ协议" class="headerlink" title="5、ARQ协议"></a>5、ARQ协议</h4><h4 id="6、滑动窗口和流量控制"><a href="#6、滑动窗口和流量控制" class="headerlink" title="6、滑动窗口和流量控制"></a>6、滑动窗口和流量控制</h4><h4 id="7、拥塞控制"><a href="#7、拥塞控制" class="headerlink" title="7、拥塞控制"></a>7、拥塞控制</h4><h4 id="8、各种协议与HTTP协议之间的关系"><a href="#8、各种协议与HTTP协议之间的关系" class="headerlink" title="8、各种协议与HTTP协议之间的关系"></a>8、各种协议与HTTP协议之间的关系</h4><h4 id="9、HTTP长连接、短链接"><a href="#9、HTTP长连接、短链接" class="headerlink" title="9、HTTP长连接、短链接"></a>9、HTTP长连接、短链接</h4><h4 id="10、HTTP是不保存状态的协议，如何保存用户的状态？"><a href="#10、HTTP是不保存状态的协议，如何保存用户的状态？" class="headerlink" title="10、HTTP是不保存状态的协议，如何保存用户的状态？"></a>10、HTTP是不保存状态的协议，如何保存用户的状态？</h4><h4 id="11、Cookie的作用是什么？和Session有什么区别？"><a href="#11、Cookie的作用是什么？和Session有什么区别？" class="headerlink" title="11、Cookie的作用是什么？和Session有什么区别？"></a>11、Cookie的作用是什么？和Session有什么区别？</h4><h3 id="七、数据库"><a href="#七、数据库" class="headerlink" title="七、数据库"></a>七、数据库</h3><h4 id="1、MySQL存储索引"><a href="#1、MySQL存储索引" class="headerlink" title="1、MySQL存储索引"></a>1、MySQL存储索引</h4><h4 id="2、字符集及校验规则"><a href="#2、字符集及校验规则" class="headerlink" title="2、字符集及校验规则"></a>2、字符集及校验规则</h4><h4 id="3、索引"><a href="#3、索引" class="headerlink" title="3、索引"></a>3、索引</h4><h4 id="4、查询缓存的使用"><a href="#4、查询缓存的使用" class="headerlink" title="4、查询缓存的使用"></a>4、查询缓存的使用</h4><h4 id="5、什么是事务"><a href="#5、什么是事务" class="headerlink" title="5、什么是事务"></a>5、什么是事务</h4><h4 id="6、事务的四大特性-ACID"><a href="#6、事务的四大特性-ACID" class="headerlink" title="6、事务的四大特性(ACID)"></a>6、事务的四大特性(ACID)</h4><h4 id="7、并发事务带来哪些问题？"><a href="#7、并发事务带来哪些问题？" class="headerlink" title="7、并发事务带来哪些问题？"></a>7、并发事务带来哪些问题？</h4><h4 id="8、事务隔离级别有哪些？MySQL的默认隔离级别是？"><a href="#8、事务隔离级别有哪些？MySQL的默认隔离级别是？" class="headerlink" title="8、事务隔离级别有哪些？MySQL的默认隔离级别是？"></a>8、事务隔离级别有哪些？MySQL的默认隔离级别是？</h4><h4 id="9、锁机制与InnoDB锁算法"><a href="#9、锁机制与InnoDB锁算法" class="headerlink" title="9、锁机制与InnoDB锁算法"></a>9、锁机制与InnoDB锁算法</h4><h4 id="10、大表优化"><a href="#10、大表优化" class="headerlink" title="10、大表优化"></a>10、大表优化</h4><h4 id="11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？"><a href="#11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？" class="headerlink" title="11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？"></a>11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？</h4><h4 id="12、分库分表后，id主键如何处理？"><a href="#12、分库分表后，id主键如何处理？" class="headerlink" title="12、分库分表后，id主键如何处理？"></a>12、分库分表后，id主键如何处理？</h4>
+<h3 id="七、Redis"><a href="#七、Redis" class="headerlink" title="七、Redis"></a>七、Redis</h3><h4 id="1、Redis为什么这么快？"><a href="#1、Redis为什么这么快？" class="headerlink" title="1、Redis为什么这么快？"></a>1、Redis为什么这么快？</h4><blockquote>
+<p>Redis内部做了非常多的性能优化，比较重要的主要有以下三点：</p>
+<ul>
+<li>Redis基于内存，内存的访问速度是磁盘的上千倍；</li>
+<li>Redis基于Reactor模式设计开发了一套高效的事件处理模型，主要是单线程事件循环和IO多路复用；</li>
+<li>Redis内置了多种优化过后的数据结构实现，性能非常高。</li>
+</ul>
+</blockquote>
+<h4 id="2、说一下Redis和Memcached的区别和共同点"><a href="#2、说一下Redis和Memcached的区别和共同点" class="headerlink" title="2、说一下Redis和Memcached的区别和共同点"></a>2、说一下Redis和Memcached的区别和共同点</h4><blockquote>
+<p>现在一般都是用Redis来实现缓存。</p>
+<p>共同点：</p>
+<ul>
+<li>都是基于内存的数据库，一般都用来当缓存使用。</li>
+<li>都有过期策略。</li>
+<li>两者的性能都非常高。</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li><p><strong>Redis 支持更丰富的数据类型（支持更复杂的应用场景）</strong>。Redis 不仅仅支持简单的 k&#x2F;v 类型的数据，同时还提供 list，set，zset，hash 等数据结构的存储。Memcached 只支持最简单的 k&#x2F;v 数据类型。</p>
+<p><strong>Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用,而 Memcached 把数据全部存在内存之中。</strong></p>
+<p><strong>Redis 有灾难恢复机制。</strong> 因为可以把缓存中的数据持久化到磁盘上。</p>
+<p><strong>Redis 在服务器内存使用完之后，可以将不用的数据放到磁盘上。但是，Memcached 在服务器内存使用完之后，就会直接报异常。</strong></p>
+<p><strong>Memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据；但是 Redis 目前是原生支持 cluster 模式的。</strong></p>
+<p><strong>Memcached 是多线程，非阻塞 IO 复用的网络模型；Redis 使用单线程的多路 IO 复用模型。</strong> （Redis 6.0 引入了多线程 IO ）</p>
+<p><strong>Redis 支持发布订阅模型、Lua 脚本、事务等功能，而 Memcached 不支持。并且，Redis 支持更多的编程语言。</strong></p>
+<p><strong>Memcached 过期数据的删除策略只用了惰性删除，而 Redis 同时使用了惰性删除与定期删除。</strong></p>
+</li>
+</ul>
+</blockquote>
+<h4 id="3、为什么要用Redis-x2F-为什么要用缓存？"><a href="#3、为什么要用Redis-x2F-为什么要用缓存？" class="headerlink" title="3、为什么要用Redis&#x2F;为什么要用缓存？"></a>3、为什么要用Redis&#x2F;为什么要用缓存？</h4><blockquote>
+<p>主要从“高性能”和“高并发”这两个点来进行讲解。</p>
+<p><strong>高性能</strong>：</p>
+<ul>
+<li>假如用户第一次访问数据库中的某些数据的话，这个过程是比较慢的，因为是从硬盘中读取的。但是，如果用户访问的数据属于高频数据并且不会经常改变的话，那么我们就可以很放心地直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当快。</li>
+</ul>
+<p><strong>高并发</strong>：</p>
+<ul>
+<li><p>一般像MySQL这类的数据库的QPS大概都在1w左右（4核8g），但是使用Redis缓存之后很容易达到10w+，甚至最高能达到30w+（就单机Redis的情况，Redis集群的话会更高）。</p>
+<p><code>QPS（Query Per Second）</code>：服务器每秒可以执行的查询次数。</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="4、Redis处理做缓存，还能做什么？"><a href="#4、Redis处理做缓存，还能做什么？" class="headerlink" title="4、Redis处理做缓存，还能做什么？"></a>4、Redis处理做缓存，还能做什么？</h4><blockquote>
+<ul>
+<li>分布式锁：通过Redis来做分布式锁是一种比较常见的方式。通常情况下，我们都是基于Redisson来实现分布式锁。</li>
+<li>限流：一般是通过Redis + Lua脚本的方式来实现限流的。</li>
+<li>消息队列：Redis自带的list数据结构可以作为一个简单的队列使用。Redis 5.0 中增加的 Stream 类型的数据结构更加适合用来做消息队列。它比较类似于 Kafka，有主题和消费组的概念，支持消息持久化以及 ACK 机制。</li>
+<li>复杂业务场景：通过 Redis 以及 Redis 扩展（比如 Redisson）提供的数据结构，我们可以很方便地完成很多复杂的业务场景比如通过 bitmap 统计活跃用户、通过 sorted set 维护排行榜。</li>
+</ul>
+</blockquote>
+<h4 id="5、Redis常用的数据结构有哪些？"><a href="#5、Redis常用的数据结构有哪些？" class="headerlink" title="5、Redis常用的数据结构有哪些？"></a>5、Redis常用的数据结构有哪些？</h4><blockquote>
+<ul>
+<li>5种基础数据结构：String（字符串）、List（列表）、Set（集合）、Hash（散列）、Zset（有序集合）。</li>
+<li>3种特殊的数据结构：HyperLogLogs（基数统计）、Bitmap （位存储）、Geospatial (地理位置)。</li>
+</ul>
+</blockquote>
+<h3 id="🌙、网络"><a href="#🌙、网络" class="headerlink" title="🌙、网络"></a>🌙、网络</h3><h4 id="1、OSI与TCP-x2F-IP各层的结构与功能，都有哪些协议？"><a href="#1、OSI与TCP-x2F-IP各层的结构与功能，都有哪些协议？" class="headerlink" title="1、OSI与TCP&#x2F;IP各层的结构与功能，都有哪些协议？"></a>1、OSI与TCP&#x2F;IP各层的结构与功能，都有哪些协议？</h4><h4 id="2、TCP三次握手与四次挥手"><a href="#2、TCP三次握手与四次挥手" class="headerlink" title="2、TCP三次握手与四次挥手?"></a>2、TCP三次握手与四次挥手?</h4><h4 id="3、TCP、UDP协议的区别"><a href="#3、TCP、UDP协议的区别" class="headerlink" title="3、TCP、UDP协议的区别"></a>3、TCP、UDP协议的区别</h4><h4 id="4、TCP协议如何保证可靠性传输"><a href="#4、TCP协议如何保证可靠性传输" class="headerlink" title="4、TCP协议如何保证可靠性传输"></a>4、TCP协议如何保证可靠性传输</h4><h4 id="5、ARQ协议"><a href="#5、ARQ协议" class="headerlink" title="5、ARQ协议"></a>5、ARQ协议</h4><h4 id="6、滑动窗口和流量控制"><a href="#6、滑动窗口和流量控制" class="headerlink" title="6、滑动窗口和流量控制"></a>6、滑动窗口和流量控制</h4><h4 id="7、拥塞控制"><a href="#7、拥塞控制" class="headerlink" title="7、拥塞控制"></a>7、拥塞控制</h4><h4 id="8、各种协议与HTTP协议之间的关系"><a href="#8、各种协议与HTTP协议之间的关系" class="headerlink" title="8、各种协议与HTTP协议之间的关系"></a>8、各种协议与HTTP协议之间的关系</h4><h4 id="9、HTTP长连接、短链接"><a href="#9、HTTP长连接、短链接" class="headerlink" title="9、HTTP长连接、短链接"></a>9、HTTP长连接、短链接</h4><h4 id="10、HTTP是不保存状态的协议，如何保存用户的状态？"><a href="#10、HTTP是不保存状态的协议，如何保存用户的状态？" class="headerlink" title="10、HTTP是不保存状态的协议，如何保存用户的状态？"></a>10、HTTP是不保存状态的协议，如何保存用户的状态？</h4><h4 id="11、Cookie的作用是什么？和Session有什么区别？"><a href="#11、Cookie的作用是什么？和Session有什么区别？" class="headerlink" title="11、Cookie的作用是什么？和Session有什么区别？"></a>11、Cookie的作用是什么？和Session有什么区别？</h4><h3 id="🌙、数据库"><a href="#🌙、数据库" class="headerlink" title="🌙、数据库"></a>🌙、数据库</h3><h4 id="1、MySQL存储索引"><a href="#1、MySQL存储索引" class="headerlink" title="1、MySQL存储索引"></a>1、MySQL存储索引</h4><h4 id="2、字符集及校验规则"><a href="#2、字符集及校验规则" class="headerlink" title="2、字符集及校验规则"></a>2、字符集及校验规则</h4><h4 id="3、索引"><a href="#3、索引" class="headerlink" title="3、索引"></a>3、索引</h4><h4 id="4、查询缓存的使用"><a href="#4、查询缓存的使用" class="headerlink" title="4、查询缓存的使用"></a>4、查询缓存的使用</h4><h4 id="5、什么是事务"><a href="#5、什么是事务" class="headerlink" title="5、什么是事务"></a>5、什么是事务</h4><h4 id="6、事务的四大特性-ACID"><a href="#6、事务的四大特性-ACID" class="headerlink" title="6、事务的四大特性(ACID)"></a>6、事务的四大特性(ACID)</h4><h4 id="7、并发事务带来哪些问题？"><a href="#7、并发事务带来哪些问题？" class="headerlink" title="7、并发事务带来哪些问题？"></a>7、并发事务带来哪些问题？</h4><h4 id="8、事务隔离级别有哪些？MySQL的默认隔离级别是？"><a href="#8、事务隔离级别有哪些？MySQL的默认隔离级别是？" class="headerlink" title="8、事务隔离级别有哪些？MySQL的默认隔离级别是？"></a>8、事务隔离级别有哪些？MySQL的默认隔离级别是？</h4><h4 id="9、锁机制与InnoDB锁算法"><a href="#9、锁机制与InnoDB锁算法" class="headerlink" title="9、锁机制与InnoDB锁算法"></a>9、锁机制与InnoDB锁算法</h4><h4 id="10、大表优化"><a href="#10、大表优化" class="headerlink" title="10、大表优化"></a>10、大表优化</h4><h4 id="11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？"><a href="#11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？" class="headerlink" title="11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？"></a>11、解释一下什么池化设计思想。什么事数据库连接池？为什么需要数据库连接池？</h4><h4 id="12、分库分表后，id主键如何处理？"><a href="#12、分库分表后，id主键如何处理？" class="headerlink" title="12、分库分表后，id主键如何处理？"></a>12、分库分表后，id主键如何处理？</h4>
                 
             </div>
             <hr/>
@@ -1453,7 +1560,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">25.8k</span>
+                        class="white-color">28k</span>
             
             
             
