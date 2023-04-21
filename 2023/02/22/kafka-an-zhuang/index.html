@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Docker随笔, Jovinbin">
-    <meta name="description" content="要理解 Docker 的内部构建，必须知道Docker 包括三个基本概念:
+    <meta name="keywords" content="Java学习笔记, Jovinbin">
+    <meta name="description" content="一、Docker上启动Kafka1、下载zookeeper镜像docker pull wurstmeister/zookeeper:3.4.6
 
-镜像（Image）：Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:16.04 就包含了完整的一套 Ubuntu">
+2、下载Kafka镜像docker pull wurstmeister/kafka:2.13-">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Docker随笔 | Jovinbin</title>
+    <title>Java学习笔记 | Jovinbin</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -314,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Docker随笔</h1>
+                    <h1 class="description center-align post-title">Java学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -343,12 +343,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Docker/">
-                                <span class="chip bg-color">Docker</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">学习笔记</span>
+                            <a href="/tags/kafka/">
+                                <span class="chip bg-color">kafka</span>
                             </a>
                         
                     </div>
@@ -359,8 +355,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Docker/" class="post-category">
-                                Docker
+                            <a href="/categories/kafka/" class="post-category">
+                                kafka
                             </a>
                         
                     </div>
@@ -372,7 +368,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-01
+                    2023-02-22
                 </div>
                 
 
@@ -381,7 +377,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    872
+                    447
                 </div>
                 
 
@@ -401,152 +397,58 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>要理解 Docker 的内部构建，必须知道Docker 包括三个基本概念:</p>
-<ul>
-<li><strong>镜像（Image）</strong>：Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:16.04 就包含了完整的一套 Ubuntu16.04 最小系统的 root 文件系统。</li>
-<li><strong>容器（Container）</strong>：镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
-<li><strong>仓库（Repository）</strong>：仓库可看成一个代码控制中心，用来保存镜像。</li>
-</ul>
-<h4 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h4><h5 id="一、镜像-x2F-容器"><a href="#一、镜像-x2F-容器" class="headerlink" title="一、镜像 &#x2F; 容器"></a><em><strong>一、镜像 &#x2F; 容器</strong></em></h5><ul>
-<li><strong>启动时交互</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span>  镜像名称【-i：交互，-t：伪终端，-d：守护式容器】【--name aaa】docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8080</span>:8080 tomcat 小p指定端口映射，大P随机端口<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h3 id="一、Docker上启动Kafka"><a href="#一、Docker上启动Kafka" class="headerlink" title="一、Docker上启动Kafka"></a>一、Docker上启动Kafka</h3><h4 id="1、下载zookeeper镜像"><a href="#1、下载zookeeper镜像" class="headerlink" title="1、下载zookeeper镜像"></a>1、下载zookeeper镜像</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull wurstmeister/zookeeper:3.4.6<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ul>
-<li><strong>查看日志</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> logs <span class="token parameter variable">-tf</span> <span class="token parameter variable">--tail</span> <span class="token number">3</span> 4e237e0e8f08<span class="token punctuation">(</span>容器id<span class="token punctuation">)</span>：【-t：查看内容，-f加上查看时间】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="2、下载Kafka镜像"><a href="#2、下载Kafka镜像" class="headerlink" title="2、下载Kafka镜像"></a>2、下载Kafka镜像</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull wurstmeister/kafka:2.13-2.8.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ul>
-<li><strong>查看容器中运行进程的信息</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">top</span> 容器id <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="3、启动zookeeper"><a href="#3、启动zookeeper" class="headerlink" title="3、启动zookeeper"></a>3、启动zookeeper</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> zookeeper <span class="token parameter variable">-p</span> <span class="token number">2181</span>:2181  <span class="token parameter variable">-t</span> wurstmeister/zookeeper:3.4.6
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ul>
-<li><strong>重新进入容器</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> attach 容器id<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4、启动Kafka"><a href="#4、启动Kafka" class="headerlink" title="4、启动Kafka"></a>4、启动Kafka</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> kafka <span class="token parameter variable">--publish</span> <span class="token number">9092</span>:9092 <span class="token parameter variable">--link</span> zookeeper:zookeeper <span class="token parameter variable">-e</span> <span class="token assign-left variable">KAFKA_BROKER_ID</span><span class="token operator">=</span><span class="token number">1</span>  <span class="token parameter variable">-e</span> <span class="token assign-left variable">HOST_IP</span><span class="token operator">=</span><span class="token number">192.168</span>.1.1  <span class="token parameter variable">-e</span> <span class="token assign-left variable">KAFKA_ZOOKEEPER_CONNECT</span><span class="token operator">=</span>zookeeper:2181 <span class="token parameter variable">-e</span> <span class="token assign-left variable">KAFKA_ADVERTISED_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://192.168.1.1:9092  <span class="token parameter variable">-e</span> <span class="token assign-left variable">KAFKA_ADVERTISED_HOST_NAME</span><span class="token operator">=</span><span class="token number">192.168</span>.1.1 <span class="token parameter variable">-e</span> <span class="token assign-left variable">KAFKA_ADVERTISED_PORT</span><span class="token operator">=</span><span class="token number">9082</span>  <span class="token parameter variable">--restart</span><span class="token operator">=</span>always  <span class="token parameter variable">-t</span>  wurstmeister/kafka:2.13-2.8.1
 
-<ul>
-<li><strong>重新进入容器（加强版）</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> 容器id /bin/bash <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment">## 部分参数含义</span>
+<span class="token assign-left variable">KAFKA_BROKER_ID</span><span class="token operator">=</span><span class="token number">1</span> kafka在集群中的唯一标识
+<span class="token assign-left variable">KAFKA_ZOOKEEPER_CONNECT</span><span class="token operator">=</span>zookeeper:2181 监听zookeeper的地址 
+<span class="token assign-left variable">KAFKA_ADVERTISED_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://192.168.1.1:9092 kafka服务器的地址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ul>
-<li><strong>直接在外部获取容器内的信息</strong></li>
+<h4 id="5、进入kafka容器"><a href="#5、进入kafka容器" class="headerlink" title="5、进入kafka容器"></a>5、进入kafka容器</h4><ul>
+<li>先查看一下Kafka的镜像ID：docker ps -a</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-t</span> 容器id <span class="token function">ls</span> <span class="token parameter variable">-l</span> /tmp（所以exec比attach强大）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202304211646544.png"></p>
 <ul>
-<li><strong>查看运行的相关信息</strong></li>
+<li>进入容器：docker exec -it ${CONTAINER ID} &#x2F;bin&#x2F;bash</li>
+<li>进入kafka的bin目录下：cd &#x2F;opt&#x2F;kafka_2.13-2.8.1&#x2F;bin</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> inspect 容器id <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">## 常见的一些kafka命令</span>
+<span class="token comment"># 创建topic	partitions：分区的数量，提高并发量与负载		replication：副本数量</span>
+kafka-topics.sh --bootstrap-server <span class="token number">127.0</span>.0.1:9092 <span class="token parameter variable">--create</span> <span class="token parameter variable">--topic</span> <span class="token variable">$&#123;topicName&#125;</span> <span class="token parameter variable">--partitions</span> <span class="token variable">$&#123;partipartions&#125;</span> --replication-factor <span class="token variable">$&#123;replication&#125;</span>
 
-<ul>
-<li><strong>docker帮助，相当于文档</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token parameter variable">--help</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 查看topic详情</span>
+kafka-topics.bat --bootstrap-server <span class="token number">127.0</span>.0.1:9092 <span class="token parameter variable">--topic</span> <span class="token variable">$&#123;topicName&#125;</span> <span class="token parameter variable">--describe</span>
 
-<ul>
-<li><strong>重启、删除、启动docker</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl restart<span class="token punctuation">\</span>stop<span class="token punctuation">\</span>start <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 生产消息</span>
+kafka-console-producer.sh --bootstrap-server localhost:9092 <span class="token parameter variable">--topic</span> <span class="token builtin class-name">test</span>
 
-<ul>
-<li><strong>查看镜像</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dcoker images<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 消费消息</span>
+kafka-console-consumer.sh --bootstrap-server localhost:9092 <span class="token parameter variable">--topic</span> <span class="token builtin class-name">test</span> --from-beginning
 
-<ul>
-<li><strong>运行镜像</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 查看组</span>
+kafka-consumer-groups.sh --bootstrap-server <span class="token number">127.0</span>.0.1:9092 <span class="token parameter variable">--describe</span> <span class="token parameter variable">--group</span> flume
 
-<ul>
-<li><strong>a表示列出所有的镜像 	q表示列出所有的id</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> images 【-qa】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 删除topic</span>
+kafka-topics.sh <span class="token parameter variable">--delete</span> --bootstrap-server <span class="token number">192.168</span>.9.20:9092 <span class="token parameter variable">--topic</span> 20220624_student_result
 
-<ul>
-<li><strong>拉取镜像</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull 某个镜像的名字<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># 0.9之后的kafka是将消息偏移量存储在kafka自己创建的一个topic内	__comsumer_offsets</span>
+<span class="token comment"># 查看消费信息</span>
+bin/kafka-console-consumer.sh <span class="token parameter variable">--topic</span> __consumer_offsets --bootstrap-server <span class="token number">192.168</span>.9.20:9092 <span class="token parameter variable">--formatter</span> <span class="token string">"kafka.coordinator.group.GroupMetadataManager\<span class="token variable">$OffsetsMessageFormatter</span>"</span> <span class="token parameter variable">--consumer.config</span> config/consumer.properties --from-beginning<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ul>
-<li><strong>删除镜像</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> rmi 【-f】 某个镜像的名字 ：删除镜像    -f：强制删除	以空格分割  删除多个镜像<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><hr>
+<p>启动kafka需要把安全组或者防火墙打开，否则可能会出现连接超时的问题。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 容器中可能没有vim等命令</span>
+可以执行以下命令进行安装
+<span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">vim</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ul>
-<li><strong>查看有几个容器在运行</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> ps（【-l：上一次运行的】【-a：所有运行的】【-n num：显示几次运行的】【-q静默模式：只显示容器编号】【--no-trunc：不截断输出】）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><strong>退出容器</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">exit（推出关闭） 	CTRL+P+Q（退出不关闭）	<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><strong>启动容器</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> start/stop/restart/kill/rm 容器编号	删除如果强制删除就加 <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><strong>批量删除</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">rm</span> <span class="token parameter variable">-f</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span><span class="token variable">)</span></span>
-<span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">docker</span> <span class="token function">rm</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ul>
-<li><strong>提交镜像</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> commit <span class="token parameter variable">-m</span><span class="token operator">=</span>“提交的描述信息” <span class="token parameter variable">-a</span><span class="token operator">=</span>“作者” 容器ID 要创建的目标敬香茗：【标签名】<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><strong>容器拷贝到主机</strong></li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">cp</span> 容器ID:容器路径 主机路径<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><p><strong>容器数据卷（容器的持久化，容器间集成、数据的共享）</strong></p>
-<ul>
-<li>宿主机和容器的数据共享（容器的挂载）</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">-v</span> /myDatavolume:/dataVolumeContainer centos<span class="token punctuation">(</span>容器名称<span class="token punctuation">)</span>
-
-<span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">-v</span> /myDatavolume:/dataVolumeContainer:ro centos<span class="token punctuation">(</span>容器名称<span class="token punctuation">)</span> 只读<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p>DockerFile（编写 构建 执行）</p>
-<p>DockerFile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本</p>
-<ul>
-<li>手动编写一个DockerFile文件，必须要符合file的规范</li>
-<li>有这个文件后，直接docker build命令执行，获得一个自定义的镜像</li>
-<li>启动（run）</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">docker build -f &#x2F;mydocker&#x2F;Dockerfile -t zjb&#x2F;centos .	自己重新构建的镜像<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-docker" data-language="docker"><code class="language-docker"><span class="token comment"># volume test</span>
-<span class="token instruction"><span class="token keyword">FROM</span> centos</span>
-<span class="token instruction"><span class="token keyword">VOLUME</span> [<span class="token string">"/dataVolumeContainer1"</span>,<span class="token string">"/dataVolumeCtontainer2"</span>]</span>
-<span class="token instruction"><span class="token keyword">CMD</span> echo <span class="token string">"finished,---------success1"</span></span>
-<span class="token instruction"><span class="token keyword">CMD</span> /bin/bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>容器间能实现数据卷的共享</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> <span class="token parameter variable">--name</span> dc02 --volumes-from dc01 zjb/centos <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>删除dc10，dc02修改后dc03可以访问</p>
-<p>删除dc02后dc03可以访问</p>
-<p>新建dc04集成dc03后在删除dc03可以访问</p>
-<p>结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用为止</p>
-</li>
-</ul>
-</li>
-<li><p>DockerFile体系结构（保留字指令）</p>
-</li>
-</ul>
-<p><img src="https://jovinbin-images.oss-cn-hangzhou.aliyuncs.com/202212011557216.png"></p>
 
                 
             </div>
@@ -573,7 +475,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jovinbin.github.io/2022/12/01/docker-xue-xi-bi-ji/">https://jovinbin.github.io/2022/12/01/docker-xue-xi-bi-ji/</a>
+                    <a href="https://jovinbin.github.io/2023/02/22/kafka-an-zhuang/">https://jovinbin.github.io/2023/02/22/kafka-an-zhuang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -611,12 +513,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Docker/">
-                                    <span class="chip bg-color">Docker</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">学习笔记</span>
+                                <a href="/tags/kafka/">
+                                    <span class="chip bg-color">kafka</span>
                                 </a>
                             
                         </div>
@@ -699,13 +597,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12/01/java-hdfs-ji-qun-lian-jie/">
+                <a href="/2023/02/22/java-xue-xi-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JAVA API连接HDFS HA集群">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Java学习笔记">
                         
-                        <span class="card-title">JAVA API连接HDFS HA集群</span>
+                        <span class="card-title">Java学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -716,7 +614,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-22
                         </span>
                         <span class="publish-author">
                             
@@ -726,10 +624,6 @@
                                     Java
                                 </a>
                             
-                            <a href="/categories/Java/Hdfs/" class="post-category">
-                                    Hdfs
-                                </a>
-                            
                             
                         </span>
                     </div>
@@ -737,12 +631,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hdfs/">
-                        <span class="chip bg-color">Hdfs</span>
-                    </a>
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
                     </a>
                     
                 </div>
@@ -756,13 +646,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/12/01/hexo-github-bo-ke-da-jian/">
+                <a href="/2022/12/15/linux-chang-yong-ming-ling/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Hexo + GitHub 博客搭建">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Linux 常用命令">
                         
-                        <span class="card-title">Hexo + GitHub 博客搭建</span>
+                        <span class="card-title">Linux 常用命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -773,14 +663,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Hexo/" class="post-category">
-                                    Hexo
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
@@ -790,8 +680,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
